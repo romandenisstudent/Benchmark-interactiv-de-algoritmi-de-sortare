@@ -50,7 +50,7 @@ def desenare_interfata(info, nume_algoritm, crescator):
     titlu = info.FONT_MARE.render(f"{nume_algoritm} - {sens}", 1, info.VERDE)
     info.fereastra.blit(titlu, (info.latime / 2 - titlu.get_width() / 2, 5))
 
-    # Meniul de controale updatat
+    # Meniul de controale
     controale = info.FONT_MIC.render("R - Reset | SPACE - Start | A - Crescator | D - Descrescator", 1, info.NEGRU)
     info.fereastra.blit(controale, (info.latime / 2 - controale.get_width() / 2, 45))
 
@@ -64,7 +64,7 @@ def desenare_interfata(info, nume_algoritm, crescator):
 def desenare_bare(info, pozitii_colorate={}, curata_fundal=False):
     lista = info.lista
 
-    # Daca desenam IN TIMPUL sortarii, curatam doar zona cu bare (evitam palpairea textului)
+    # Daca desenam IN TIMPUL sortarii, curatam doar zona cu bare
     if curata_fundal:
         zona_curatare = (info.PADDING_LATERAL // 2, info.PADDING_SUS,
                          info.latime - info.PADDING_LATERAL, info.inaltime - info.PADDING_SUS)
@@ -75,7 +75,6 @@ def desenare_bare(info, pozitii_colorate={}, curata_fundal=False):
         y = info.inaltime - (valoare - info.val_min) * info.inaltime_bloc
         culoare = info.GRI_URI[i % 3]
 
-        # SARCINA LUI RAZVAN: Daca bara curenta e in dictionarul de culori, ii schimbam culoarea (Rosu/Verde)
         if i in pozitii_colorate:
             culoare = pozitii_colorate[i]
 
@@ -84,10 +83,6 @@ def desenare_bare(info, pozitii_colorate={}, curata_fundal=False):
     if curata_fundal:
         pygame.display.update()
 
-
-# ==========================================
-# SARCINA LUI RAZVAN: ALGORITMII (GENERATORS)
-# ==========================================
 
 def bubble_sort(info, crescator=True):
     lista = info.lista
@@ -98,11 +93,7 @@ def bubble_sort(info, crescator=True):
 
             if (numar1 > numar2 and crescator) or (numar1 < numar2 and not crescator):
                 lista[j], lista[j + 1] = lista[j + 1], lista[j]
-
-                # Desenam barele care se schimba intre ele (Rosu si Verde)
                 desenare_bare(info, {j: info.VERDE, j + 1: info.ROSU}, True)
-
-                # YIELD este secretul! Pune pauza functiei si lasa ecranul sa se randeze
                 yield True
     return lista
 
@@ -127,9 +118,6 @@ def insertion_sort(info, crescator=True):
     return lista
 
 
-# ==========================================
-
-
 def generare_lista_start(n, val_min, val_max):
     lista_noua = []
     for _ in range(n):
@@ -148,22 +136,29 @@ def main():
     lista = generare_lista_start(n, val_min, val_max)
     info = InfoDesenare(800, 600, lista)
 
-    # Variabile noi pentru a controla starea animatiei
     sortare = False
     crescator = True
     algoritm_sortare = bubble_sort
     nume_algoritm = "Bubble Sort"
     generator_sortare = None
 
+    # --- INITIALIZARE SUNET ---
+    pygame.mixer.init()
+    try:
+        sunet = pygame.mixer.Sound("click.wav")
+        sunet.set_volume(0.3)
+    except FileNotFoundError:
+        print("Atentie: Fisierul click.wav nu a fost gasit in folder!")
+    # --------------------------
+
     while ruleaza:
         ceas.tick(60)
 
-        # Logica adaugata: Rulam cate un "cadru" din algoritm daca sortarea e activa
         if sortare:
             try:
                 next(generator_sortare)
             except StopIteration:
-                sortare = False  # Algoritmul a terminat
+                sortare = False
         else:
             desenare_interfata(info, nume_algoritm, crescator)
 
@@ -172,6 +167,16 @@ def main():
                 ruleaza = False
 
             if event.type == pygame.KEYDOWN:
+
+                # --- REDARE SUNET OPTIMIZATA ---
+                taste_valide = [pygame.K_r, pygame.K_SPACE, pygame.K_a, pygame.K_d, pygame.K_b, pygame.K_i]
+                if event.key in taste_valide:
+                    try:
+                        sunet.play()
+                    except:
+                        pass
+                # -------------------------------
+
                 if event.key == pygame.K_r:
                     lista = generare_lista_start(n, val_min, val_max)
                     info.setare_lista(lista)
@@ -179,10 +184,8 @@ def main():
 
                 elif event.key == pygame.K_SPACE and not sortare:
                     sortare = True
-                    # Aici initializam generatorul
                     generator_sortare = algoritm_sortare(info, crescator)
 
-                # Taste noi adaugate pentru meniuri
                 elif event.key == pygame.K_a and not sortare:
                     crescator = True
                 elif event.key == pygame.K_d and not sortare:
