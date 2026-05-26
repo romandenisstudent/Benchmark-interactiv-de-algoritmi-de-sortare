@@ -1,1 +1,28 @@
-📊 Benchmark Interactiv de Algoritmi de Sortare (Python / Pygame)📖 Despre ProiectAcest proiect este o aplicație interactivă creată cu Python și Pygame pentru a testa, analiza și vizualiza performanța diferiților algoritmi de sortare. Scopul nostru este de a oferi un benchmark clar între algoritmii elementari ($O(n^2)$) și cei eficienți ($O(n \log n)$), evidențiind modul în care aceștia interacționează cu memoria prin operațiuni de interschimbare și comparare.Aplicația se distinge prin faptul că permite vizualizarea animației de sortare pas cu pas, folosind conceptul de generatori (yield) din Python pentru a păstra interfața grafică responsivă în timpul calculelor.Aplicația măsoară și analizează:⏱️ Timpul de execuție: Măsurat precis la finalizarea sortării.🔄 Operațiunile interne: Numărul total de comparații și interschimbări (swaps), actualizate live pe ecran.📈 Comportamentul pe seturi diverse de date: Liste generate aleator, liste deja sortate, liste sortate invers.👨‍💻 Echipa ProiectuluiMolnar Răzvan & Roman DenisSpecializare: Informatică, Anul II🚀 Jurnal de Activitate și Arhitectură Tehnică✅ Săptămâna 1-2: Setup și Arhitectura de Bază (Pygame Loop)Am configurat fereastra principală Pygame (setare rezoluție, FPS, culori de bază).Am implementat bucla principală de evenimente (main event loop) pentru a gestiona închiderea aplicației și input-ul de la tastatură.Am creat clasa DrawInformation care gestionează padding-ul, lățimea și înălțimea barelor în funcție de dimensiunea ferestrei și a listei.Am scris funcția de generare a listei de numere aleatoare folosind modulul random.✅ Săptămâna 3-4: Vizualizarea și Primii Algoritmi (Generators)Am implementat funcția de desenare a listei pe ecran (draw_list), unde fiecare număr devine un dreptunghi de o anumită înălțime.Am implementat Bubble Sort și Selection Sort.Imbunătățire Tehnică: Am transformat algoritmii de sortare în generatori (folosind yield). Astfel, după fiecare mutare, algoritmul cedează controlul înapoi către Pygame pentru a desena noul cadru, evitând blocarea ecranului.Am adăugat evidențierea vizuală: barele care sunt comparate la un moment dat devin roșii/verzi temporar.✅ Săptămâna 5-6: UI On-Screen și Sistemul de MetriciAm adăugat text renderizat pe ecran (pygame.font) pentru a afișa controalele: Apasă SPACE pentru Start, R pentru Reset, A pentru Ascendent.Am implementat contoarele interne. Algoritmii (generatorii) returnează la fiecare pas starea listei + numărul curent de comparisons și swaps.Am afișat aceste contoare live în partea de sus a ecranului.✅ Săptămâna 7-8: Algoritmi Avansați și Cazuri de TestareAm implementat Insertion Sort și algoritmul recursiv Quick Sort (utilizând yield from).Am adăugat controale pentru generarea specifică a cazurilor de test: Liste Sortate Invers și Liste Aproape Sortate.✅ Săptămâna 9-10: Refactorizare (OOP) și Modul Benchmark FinalAm curățat codul structurându-l în clase clare (AlgorithmManager, UIManager).Am implementat "Summary Screen" cu statistici detaliate.Am optimizat logica de desenare pentru performanță sporită la liste mari.Finalizarea documentației și adăugarea de comentarii pe funcțiile complexe.
+
+---
+
+## 🚀 Jurnal de Activitate și Arhitectură Tehnică
+
+✅ **Săptămâna 1-2: Setup și Arhitectura de Bază (Pygame Loop)**
+* Configurare fereastră principală Pygame (setare rezoluție, FPS, culori de bază).
+* Implementare buclă principală de evenimente (`main event loop`).
+* Creare clasă `DrawInformation` (gestiune padding, lățime/înălțime bare).
+* Funcție generare listă numere aleatoare.
+
+✅ **Săptămâna 3-4: Vizualizarea și Primii Algoritmi (Generators)**
+* Implementare funcție desenare listă (`draw_list`).
+* Implementare **Bubble Sort** și **Selection Sort** folosind `yield` pentru a menține interfața responsivă.
+* Evidențiere vizuală (bare comparate colorate roșu/verde).
+
+✅ **Săptămâna 5-6: UI On-Screen și Sistemul de Metrici**
+* Integrare `pygame.font` pentru afișarea controalelor (SPACE, R, A).
+* Implementare contoare interne (comparisons, swaps) actualizate live.
+
+✅ **Săptămâna 7-8: Algoritmi Avansați și Cazuri de Testare**
+* Implementare **Insertion Sort** și **Quick Sort** (recursiv, utilizând `yield from`).
+* Adăugare controale pentru cazuri de test: Liste Sortate Invers și Aproape Sortate.
+
+✅ **Săptămâna 9-10: Refactorizare (OOP) și Modul Benchmark Final**
+* Structurare cod în clase (`AlgorithmManager`, `UIManager`).
+* Implementare "Summary Screen" (Ecran de Rezultate).
+* Optimizare logică desenare pentru performanță sporită.
