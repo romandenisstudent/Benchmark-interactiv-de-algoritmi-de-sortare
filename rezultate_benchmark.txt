@@ -1,0 +1,2 @@
+[04-05-2026 11:04] Quick Sort | N=100 | Cresc | Timp: 6.5296s | Comp: 635 | Swaps: 391
+[04-05-2026 14:20] Quick Sort | N=80 | Cresc | Timp: 3.7429s | Comp: 465 | Swaps: 225
