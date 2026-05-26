@@ -43,11 +43,11 @@ Aplicația se distinge prin faptul că permite vizualizarea animației de sortar
 * Vom implementa contoarele interne. Algoritmii (generatorii) vor returna un dicționar sau un tuplu la fiecare pas, conținând starea listei + numărul curent de `comparisons` și `swaps`.
 * Vom afișa aceste contoare live în partea de sus a ecranului.
 
-⬜ **Săptămâna 7-8: Algoritmi Avansați și Cazuri de Testare**
+✅ **Săptămâna 7-8: Algoritmi Avansați și Cazuri de Testare**
 * Vom implementa **Insertion Sort** și algoritmul recursiv **Quick Sort**. Pentru Quick Sort, adaptarea la formatul de generator (`yield from`) va fi o provocare tehnică pe care o vom rezolva.
 * Vom adăuga controale pentru generarea specifică a cazurilor de test: Liste Sortate Invers (Worst Case pentru Quick Sort clasic) și Liste Aproape Sortate (Best Case pentru Insertion Sort).
 
-⬜ **Săptămâna 9-10: Refactorizare (OOP) și Modul Benchmark Final**
+✅ **Săptămâna 9-10: Refactorizare (OOP) și Modul Benchmark Final**
 * Vom curăța codul structurându-l în clase clare (Ex: `AlgorithmManager`, `UIManager`).
 * Vom implementa un "Summary Screen" (Ecran de Rezultate) care apare la finalul sortării cu statistici detaliate.
 * Vom optimiza logica de desenare (ștergerea doar a porțiunilor modificate din ecran în loc de tot fundalul, pentru performanță sporită la liste mari).
